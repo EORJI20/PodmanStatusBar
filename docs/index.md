@@ -25,7 +25,7 @@ I created this app because I often forgot to shut down my Podman VM and also run
 ![VM Stopped](../img/off.png)
 
 ### MENÙ
-![MENU](img/../menu.png)
+![MENU](../img/menu.png)
 
 ## Requirements
 
