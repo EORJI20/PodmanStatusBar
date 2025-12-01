@@ -2,7 +2,8 @@ import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusItem: NSStatusItem?
-    var timer: Timer?
+    var timerCheckStatus: Timer?
+    var timerUpdateVmStateAtStartMachine : Timer?
     var isVMRunning: Bool = false
     var podmanPath: String = "/opt/homebrew/bin/podman"
     
@@ -22,7 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         checkPodmanStatus()
         
         // Controlla ogni 5 secondi
-        timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
+        timerCheckStatus = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
             self.checkPodmanStatus()
         }
     }
@@ -30,18 +31,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func statusItemClicked() {
         let menu = NSMenu()
         
-        menu.addItem(NSMenuItem(title: "Controlla stato", action: #selector(checkPodmanStatusManually), keyEquivalent: "r"))
+        menu.addItem(NSMenuItem(title: "Check VM State", action: #selector(checkPodmanStatusManually), keyEquivalent: "r"))
         menu.addItem(NSMenuItem.separator())
         
         // Mostra i container solo se la VM è in esecuzione
         if isVMRunning {
             let containers = getRunningContainers()
             if containers.isEmpty {
-                let item = NSMenuItem(title: "Nessun container in esecuzione", action: nil, keyEquivalent: "")
+                let item = NSMenuItem(title: "No container in execution", action: nil, keyEquivalent: "")
                 item.isEnabled = false
                 menu.addItem(item)
             } else {
-                let containersTitle = NSMenuItem(title: "Container in esecuzione:", action: nil, keyEquivalent: "")
+                let containersTitle = NSMenuItem(title: "Container in execution:", action: nil, keyEquivalent: "")
                 containersTitle.isEnabled = false
                 menu.addItem(containersTitle)
                 
@@ -55,10 +56,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             menu.addItem(NSMenuItem.separator())
         }
         
-        menu.addItem(NSMenuItem(title: "Avvia VM", action: #selector(startVM), keyEquivalent: "s"))
-        menu.addItem(NSMenuItem(title: "Ferma VM", action: #selector(stopVM), keyEquivalent: "x"))
+        menu.addItem(NSMenuItem(title: "Start VM", action: #selector(startVM), keyEquivalent: "s"))
+        menu.addItem(NSMenuItem(title: "Stop VM", action: #selector(stopVM), keyEquivalent: "x"))
         menu.addItem(NSMenuItem.separator())
-        menu.addItem(NSMenuItem(title: "Esci", action: #selector(quit), keyEquivalent: "q"))
+        menu.addItem(NSMenuItem(title: "Exit", action: #selector(quit), keyEquivalent: "q"))
         
         statusItem?.menu = menu
         statusItem?.button?.performClick(nil)
@@ -101,16 +102,36 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func updateStatus(isRunning: Bool) {
         if let button = statusItem?.button {
-            let imageName = isRunning ? "podman-on" : "podman-off"
-            isVMRunning = isRunning
-            if let image = NSImage(named: imageName) {
-                // Ridimensiona l'immagine per la menu bar (circa 18x18 punti)
-                image.size = NSSize(width: 44, height: 22)
-                image.isTemplate = false // Cambia a true se vuoi che l'immagine si adatti al tema (chiaro/scuro)
-                button.image = image
+            timerUpdateVmStateAtStartMachine?.invalidate()
+            timerUpdateVmStateAtStartMachine = nil
+            
+            if isRunning {
+                timerUpdateVmStateAtStartMachine = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] _ in
+                    guard let self else { return }
+                    
+                    self.isVMRunning = true
+                    
+                    if let image = NSImage(named: "podman-on") {
+                        image.size = NSSize(width: 44, height: 22)
+                        image.isTemplate = false
+                        button.image = image
+                    }
+                    
+                    button.toolTip = "Podman VM: active"
+                }
+            } else {
+                
+                self.isVMRunning = false
+                
+                if let image = NSImage(named: "podman-off") {
+                    image.size = NSSize(width: 44, height: 22)
+                    image.isTemplate = false
+                    button.image = image
+                }
+                button.toolTip = "Podman VM: not active"
             }
             
-            button.toolTip = isRunning ? "Podman VM: in esecuzione" : "Podman VM: non attiva"
+          
         }
     }
     
@@ -119,6 +140,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func startVM() {
+        statusItem?.menu?.cancelTracking()
+
         executeCommand(args: ["machine", "start"])
         // Aspetta un secondo e ricontrolla
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -127,6 +150,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func stopVM() {
+        statusItem?.menu?.cancelTracking()
+
         executeCommand(args: ["machine", "stop"])
         // Aspetta un secondo e ricontrolla
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -142,7 +167,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         do {
             try task.run()
         } catch {
-            print("Errore nell'esecuzione del comando: \(error)")
+            print("Error in command execution: \(error)")
         }
     }
     
@@ -166,7 +191,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 }
             }
         } catch {
-            print("Errore nel trovare il percorso di podman: \(error)")
+            print("Error in podman path: \(error)")
         }
     }
     
@@ -192,14 +217,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     .filter { !$0.isEmpty }
             }
         } catch {
-            print("Errore nel recupero dei container: \(error)")
+            print("Error in container search: \(error)")
         }
         
         return containerNames
     }
     
     @objc func quit() {
-        timer?.invalidate()
+        timerCheckStatus?.invalidate()
         NSApplication.shared.terminate(self)
     }
 }
