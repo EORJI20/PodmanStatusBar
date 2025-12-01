@@ -1,3 +1,8 @@
+
+![Platform](https://img.shields.io/badge/platform-macOS-blue)
+![Swift](https://img.shields.io/badge/swift-5-orange)
+![License MIT](https://img.shields.io/badge/license-MIT-green)
+
 # PodmanStatusBar
 
 A lightweight macOS status bar application to monitor and manage Podman VMs and containers. 
@@ -37,4 +42,5 @@ Contributions are welcome! Feel free to open issues or submit pull requests.
 - [ ] Start and Stop containers from the menu
 - [ ] Start and Stop Pods
 - [ ] List of active Pods
+
 
